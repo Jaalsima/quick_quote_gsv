@@ -3,42 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function welcome()
+    public function home(): View
     {
-
-        return view('welcome');
+        return view('home.home');
     }
 
-    public function about()
+    public function about(): View
     {
-        return view('about');
+        return view('home.about');
     }
 
-    public function services()
+    public function contact(): View
     {
-        return view('services');
+        return view('home.contact');
     }
 
-    public function contact()
+    public function blog(): View
     {
-        return view('contact');
+        return view('home.blog');
     }
 
-    public function blog()
+    public function services(): View
     {
-        return view('blog');
+        return view('home.services');
     }
 
-    public function terms()
+    public function terms(): View
     {
-        return view('terms');
+        return view('home.terms');
     }
 
-    public function policy()
+    public function policies(): View
     {
-        return view('policy');
+        return view('home.policies');
     }
 }

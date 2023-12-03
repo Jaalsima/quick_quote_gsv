@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = User::class;
+
     /**
      * Define the model's default state.
      *
@@ -20,16 +24,22 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->firstName();
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'two_factor_secret' => null,
+            'document'                  => Str::random(10),
+            'name'                      => $name,
+            'email'                     => $this->faker->unique()->safeEmail(),
+            'address'                   => $this->faker->address(),
+            'phone'                     => $this->faker->phoneNumber(),
+            'email_verified_at'         => now(),
+            'password'                  => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'slug'                      => Str::slug($name),
+            'status'                    => $this->faker->randomElement(['Activo', 'Inactivo']),
+            'two_factor_secret'         => null,
             'two_factor_recovery_codes' => null,
-            'remember_token' => Str::random(10),
-            'profile_photo_path' => null,
-            'current_team_id' => null,
+            'remember_token'            => Str::random(10),
+            'profile_photo_path'        => 'users/' . fake()->image('public/storage/users', 640, 480, null, false),
+            'current_team_id'           => null,
         ];
     }
 
@@ -50,14 +60,14 @@ class UserFactory extends Factory
      */
     public function withPersonalTeam(callable $callback = null): static
     {
-        if (! Features::hasTeamFeatures()) {
+        if (!Features::hasTeamFeatures()) {
             return $this->state([]);
         }
 
         return $this->has(
             Team::factory()
                 ->state(fn (array $attributes, User $user) => [
-                    'name' => $user->name.'\'s Team',
+                    'name' => $user->name . '\'s Team',
                     'user_id' => $user->id,
                     'personal_team' => true,
                 ])

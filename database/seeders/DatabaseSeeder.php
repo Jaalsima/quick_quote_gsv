@@ -2,8 +2,11 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +21,25 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Storage::deleteDirectory('customers');
+        Storage::makeDirectory('customers');
+        
+        Storage::deleteDirectory('products');
+        Storage::makeDirectory('products');
+        
+        Storage::deleteDirectory('suppliers');
+        Storage::makeDirectory('suppliers');
+        
+        Storage::deleteDirectory('users');
+        Storage::makeDirectory('users');
+
+        $this->call(BrandSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(CustomerSeeder::class);
+        $this->call(SupplierSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
