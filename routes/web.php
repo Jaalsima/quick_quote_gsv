@@ -2,54 +2,31 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Livewire\Customers\IndexCustomer;
-use App\Http\Livewire\Products\IndexProduct;
-use App\Http\Livewire\Suppliers\IndexSupplier;
-use App\Http\Livewire\Users\IndexUser;
-use App\Http\Controllers\Menu\MenuController;
-use App\Http\Livewire\Products\BrandManagement;
-use App\Http\Livewire\Products\CategoryManagement;
-use App\Http\Livewire\Inventory\InventoryManagement;
-use App\Http\Controllers\Pdf\InventoryReport;
-use App\Http\Livewire\Purchases\PurchaseManagement;
-use App\Http\Livewire\Sales\SaleManagement;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QuotationController;
 
 
-// Rutas para autenticación por redes sociales (Google y Facebook)
-
-Route::get('/auth/{driver}/redirect', [AuthController::class, 'redirect'])->name('auth.redirect');
-Route::get('/auth/{driver}/callback', [AuthController::class, 'callback'])->name('auth.callback');
-
-Route::get('/',         [HomeController::class, 'home'])->name('home');
-Route::get('/about',    [HomeController::class, 'about'])->name('about');
-Route::get('/blog',     [HomeController::class, 'blog'])->name('blog');
-Route::get('/contact',  [HomeController::class, 'contact'])->name('contact');
+Route::get('/',         [HomeController::class, 'welcome'])->name('welcome');
+Route::get('/help',    [HomeController::class, 'help'])->name('help');
+Route::get('/settings',     [HomeController::class, 'settings'])->name('settings');
 Route::get('/policies', [HomeController::class, 'policies'])->name('policies');
 Route::get('/services', [HomeController::class, 'services'])->name('services');
-Route::get('/terms',    [HomeController::class, 'terms'])->name('terms');
+Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+Route::get('/manual',    [HomeController::class, 'manual'])->name('manual');
 
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    //Menú para rol administrador
-    Route::get('/admin', [MenuController::class, 'admin'])->name('admin');
-    //Menú para rol vendedor
-    Route::get('/seller', [MenuController::class, 'seller'])->name('seller');
-    //Menú para rol invitado
-    Route::get('/guest', [MenuController::class, 'guest'])->name('guest');
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    Route::get('/inventory-report', [InventoryReport::class, 'pdfInventoryReportGeneration'])->name('inventory-report'); // Ruta para PDFs
-
-    Route::get('/index-user', IndexUser::class)->name('index-user');
-    Route::get('/index-product', IndexProduct::class)->name('index-product');
-    Route::get('/index-supplier', IndexSupplier::class)->name('index-supplier');
-    Route::get('/index-customer', IndexCustomer::class)->name('index-customer');
-    Route::get('/purchases', PurchaseManagement::class)->name('purchases');
-    Route::get('/sales', SaleManagement::class)->name('sales');
-    Route::get('/inventory', InventoryManagement::class)->name('inventory');
-    Route::get('/Categories', CategoryManagement::class)->name('categories');
-    Route::get('/Brands', BrandManagement::class)->name('brands');
+    Route::get('quotations', [QuotationController::class, 'index'])->name('quotations');
+    Route::get('/quotations/create', [QuotationController::class, 'create'])->name('quotations.create');
+    Route::post('/quotations/store', [QuotationController::class, 'store'])->name('quotations.store');
+    Route::get('/quotations/{quotation}', [QuotationController::class, 'show'])->name('quotations.show');
+    Route::get('/quotations/{quotation}/edit', [QuotationController::class, 'edit'])->name('quotations.edit');
+    Route::put('/quotations/{quotation}/update', [QuotationController::class, 'update'])->name('quotations.update');
+    Route::delete('/quotations/{quotation}/delete', [QuotationController::class, 'destroy'])->name('quotations.destroy');
 });

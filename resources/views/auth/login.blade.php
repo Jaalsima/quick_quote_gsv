@@ -3,8 +3,7 @@
         <x-slot name="logo">
             <div class="flex">
                 <x-authentication-card-logo />
-                <p class="mt-4 ml-4 text-5xl font-bold text-center text-gray-700 dark:text-gray-300"><span
-                        class="text-red-700">JS</span>tock
+                <p class="mt-4 ml-4 text-5xl font-bold text-center text-gray-700 dark:text-gray-300">
                 </p>
             </div>
         </x-slot>
@@ -12,17 +11,13 @@
         <x-validation-errors class="mb-4" />
 
         @if (session('status'))
-            <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
-                {{ session('status') }}
-            </div>
+        <div class="mb-4 text-sm font-medium text-green-600 dark:text-green-400">
+            {{ session('status') }}
+        </div>
         @endif
 
-        <div class="relative w-5/6 py-3 mx-auto md:w-3/5 lg:w-1/3 2xl:w-1/4">
-            <div
-                class="absolute inset-0 transform skew-y-0 shadow-lg bg-gradient-to-r from-white to-red-900 -rotate-6 rounded-3xl">
-            </div>
-
-            <div class="relative px-6 py-10 bg-gray-600 dark:shadow-2xl rounded-3xl">
+        <div class="relative w-5/6 py-3 mx-auto md:w-4/5 lg:w-1/3 2xl:w-1/4">
+            <div class="relative px-6 py-10 bg-gradient-to-r from-blue-400 to-blue-600 dark:shadow-2xl rounded-3xl">
                 <div class="max-w-md mx-auto">
                     <div>
                         <h1 class="mb-4 text-3xl text-center text-gray-200">Ingresar</h1>
@@ -31,37 +26,32 @@
                         @csrf
                         <div>
                             <x-label for="email" value="{{ __('Email') }}" />
-                            <x-input id="email" class="block w-full mt-1" type="email" name="email"
-                                :value="old('email')" required autofocus autocomplete="username" />
+                            <x-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                         </div>
                         <div class="mt-4">
                             <x-label for="password" value="{{ __('Password') }}" />
-                            <x-input id="password" class="block w-full mt-1" type="password" name="password" required
-                                autocomplete="current-password" />
+                            <x-input id="password" class="block w-full mt-1" type="password" name="password" required autocomplete="current-password" />
                         </div>
                         <div class="block mt-4">
                             <label for="remember_me" class="flex items-center">
                                 <x-checkbox id="remember_me" name="remember" />
-                                <span
-                                    class="ml-2 text-sm text-gray-200 dark:text-gray-400 dark:hover:text-gray-100">{{ __('Recuérdame') }}</span>
+                                <span class="ml-2 text-sm text-gray-200 dark:text-gray-400 dark:hover:text-gray-100">{{ __('Recuérdame') }}</span>
                             </label>
                         </div>
                         <div class="flex items-center justify-around mt-4">
                             @if (Route::has('password.request'))
-                                <div class="flex flex-col text-center">
-                                    <a class="text-sm text-gray-200 underline rounded-md dark:text-gray-400 hover:text-white dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                                        href="{{ route('password.request') }}">
-                                        {{ __('¿Olvidaste tu contraseña?') }}
-                                    </a>
+                            <div class="flex flex-col text-center">
+                                <a class="text-sm text-gray-200 underline rounded-md dark:text-gray-400 hover:text-white dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                                    {{ __('¿Olvidaste tu contraseña?') }}
+                                </a>
 
-                                    <a class="text-sm text-gray-200 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
-                                        href="{{ route('register') }}">
-                                        {{ __('¿Aún no tienes una cuenta?') }}
-                                    </a>
-                                </div>
+                                <a class="text-sm text-gray-200 underline rounded-md dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('register') }}">
+                                    {{ __('¿Aún no tienes una cuenta?') }}
+                                </a>
+                            </div>
                             @endif
                             <div>
-                                <x-button class="ml-4">
+                                <x-button class="ml-4 bg-blue-600 hover:bg-blue-700">
                                     {{ __('Acceder') }}
                                 </x-button>
                             </div>

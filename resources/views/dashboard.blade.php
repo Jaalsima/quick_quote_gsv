@@ -1,8 +1,14 @@
 <x-app-layout>
-    <div class="pt-6 pb-2 overflow-hidden">
-        <div class="w-full mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-lg dark:bg-gray-700 sm:rounded-lg">
-                <livewire:inventory.inventory-graphics />
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Quick Quote ') }}<span class="text-[#FF5E17]">G</span><span class="text-[#70A02A]">S</span><span class="text-[#09217C]">V</span>
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                <x-welcome />
             </div>
         </div>
     </div>
