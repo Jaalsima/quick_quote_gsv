@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-gradient-to-r from-blue-400 to-blue-600 border-b">
+<nav x-data="{ open: false }" class="bg-gradient-to-r from-gray-400 to-gray-500 border-b">
     <div class="mx-4">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -8,7 +8,7 @@
                     </a>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex  text-blue-200">
                     <x-nav-link :href="auth()->check() ? route('dashboard') : route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Inicio') }}
                     </x-nav-link>

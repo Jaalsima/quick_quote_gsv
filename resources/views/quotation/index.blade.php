@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Lista de Cotizaciones
+            Cotizaciones
         </h2>
     </x-slot>
 
@@ -32,7 +32,7 @@
                             @foreach ($quotations as $quotation)
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    {{ $quotation->client_name }}
+                                    {{ $quotation->client->name }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     {{ $quotation->created_at->format('d/m/Y') }}

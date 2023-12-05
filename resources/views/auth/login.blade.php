@@ -17,7 +17,7 @@
         @endif
 
         <div class="relative w-5/6 py-3 mx-auto md:w-4/5 lg:w-1/3 2xl:w-1/4">
-            <div class="relative px-6 py-10 bg-gradient-to-r from-blue-400 to-blue-600 dark:shadow-2xl rounded-3xl">
+            <div class="relative px-6 py-10 bg-gradient-to-r from-gray-400 to-gray-600 dark:shadow-2xl rounded-3xl">
                 <div class="max-w-md mx-auto">
                     <div>
                         <h1 class="mb-4 text-3xl text-center text-gray-200">Ingresar</h1>
@@ -51,7 +51,7 @@
                             </div>
                             @endif
                             <div>
-                                <x-button class="ml-4 bg-blue-600 hover:bg-blue-700">
+                                <x-button class="ml-4 bg-gray-600 hover:bg-gray-700">
                                     {{ __('Acceder') }}
                                 </x-button>
                             </div>

@@ -29,7 +29,7 @@
         <div>
             {{-- <x-sidebar /> --}}
             @if (isset($header))
-            <header class="bg-white shadow-md dark:bg-gray-800 shadow-gray-400 dark:shadow-gray-600">
+            <header class="bg-gray-200 shadow-md dark:bg-gray-800 shadow-gray-400 dark:shadow-gray-600">
                 <div class="px-4 py-6">
                     {{ $header }}
                 </div>
