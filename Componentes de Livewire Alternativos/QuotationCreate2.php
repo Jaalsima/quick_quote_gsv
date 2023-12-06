@@ -8,8 +8,9 @@ use App\Models\Client;
 use App\Models\Project;
 use Illuminate\Validation\Rule;
 
-class QuotationCreate extends Component
+class QuotationCreate2 extends Component
 {
+
     public $open_create = false;
     public $project_id;
     public $client_id;

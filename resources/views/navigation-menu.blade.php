@@ -18,6 +18,18 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('clients') }}" :active="request()->routeIs('clients')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('projects') }}" :active="request()->routeIs('projects')">
+                        {{ __('Proyectos') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link href="{{ route('quotations') }}" :active="request()->routeIs('quotations')">
                         {{ __('Cotizaciones') }}
                     </x-nav-link>

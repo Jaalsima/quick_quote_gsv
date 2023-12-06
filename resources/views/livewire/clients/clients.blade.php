@@ -6,15 +6,11 @@
         </div>
         <div class="inline mt-4 pl-4 pr-24 md:pl-0 md:pr-0 md:mt-0 md:block md:col-span-4">
             <div class="text-xl font-bold text-center text-blue-400 uppercase">
-                <h1>Cotizaciones</h1>
+                <h1>Clientes</h1>
             </div>
         </div>
         <div class="inline mt-4 md:mt-0 md:block md:col-span-4">
-            <a href="{{route('quotation.create')}}">
-                <x-secondary-button class="float-right dark:bg-gray-800 text-blue-500 bg-blue-100 border border-blue-500 shadow-md hover:shadow-blue-400 hover:bg-blue-400 hover:text-white">
-                    <i class="fa fa-solid fa-plus"> Nueva Cotización</i>
-                </x-secondary-button>
-            </a>
+            <livewire:clients.client-create />
         </div>
     </div>
 
@@ -42,9 +38,9 @@
                         @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('client_id')">
-                        Cliente
-                        @if ($sort == 'client_id')
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('name')">
+                        Nombre
+                        @if ($sort == 'name')
                         @if ($direction == 'asc')
                         <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
                         @else
@@ -55,9 +51,9 @@
                         @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('total_quotation_amount')">
-                        Precio Total
-                        @if ($sort == 'total_quotation_amount')
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('address')">
+                        Dirección
+                        @if ($sort == 'address')
                         @if ($direction == 'asc')
                         <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
                         @else
@@ -68,8 +64,44 @@
                         @endif
                     </th>
 
-                    {{-- Otros campos según tus necesidades --}}
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('phone')">
+                        Teléfono
+                        @if ($sort == 'phone')
+                        @if ($direction == 'asc')
+                        <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
+                        @else
+                        <i class="ml-2 fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                        @else
+                        <i class="ml-2 fa-solid fa-sort"></i>
+                        @endif
+                    </th>
 
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('email')">
+                        Correo
+                        @if ($sort == 'email')
+                        @if ($direction == 'asc')
+                        <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
+                        @else
+                        <i class="ml-2 fa-solid fa-arrow-down-z-a"></i>
+                        @endif
+                        @else
+                        <i class="ml-2 fa-solid fa-sort"></i>
+                        @endif
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Consumo Energía Promedio
+                    </th>
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Nivel de Radiación Solar
+                    </th>
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        longitud Cubierta
+                    </th>
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Ancho Cubierta
+                    </th>
                     <th scope="col" class="px-6 py-3">
                         Acciones
                     </th>
@@ -77,27 +109,33 @@
             </thead>
 
             <tbody>
-                @forelse ($quotations as $quotation)
+                @forelse ($clients as $client)
                 <tr class="text-center bg-white border-b text-md dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $quotation->id }}
+                        {{ $client->id }}
                     </th>
-                    <td class="px-6 py-4 dark:text-lg">{{ $quotation->client->name }}</td>
-                    <td class="px-6 py-4 dark:text-lg">{{ $quotation->total_quotation_amount }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->name }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->address }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->phone }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->email }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->average_energy_consumption }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->solar_radiation_level }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->roof_dimensions_length }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $client->roof_dimensions_width }}</td>
                     {{-- Agrega aquí otros campos según tus necesidades --}}
                     <td class="flex justify-around py-4 pl-2 pr-8">
                         {{-- Acciones --}}
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
-                            <livewire:quotations.quotation-show :quotation='$quotation' :key='$quotation->id' />
-                            <livewire:quotations.quotation-edit :quotation='$quotation' :key='$quotation->id' />
-                            <livewire:quotations.quotation-delete :quotation='$quotation' :key='$quotation->id' />
+                            <livewire:clients.client-show :client='$client' :key='$client->id' />
+                            <livewire:clients.client-edit :client='$client' :key='$client->id' />
+                            <livewire:clients.client-delete :client='$client' :key='$client->id' />
                         </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
                     <td colspan="4" class="text-3xl text-center dark:text-gray-200">
-                        No hay cotizaciones disponibles
+                        No hay clientes disponibles
                     </td>
                 </tr>
                 @endforelse
@@ -107,7 +145,7 @@
 
         {{-- Paginación --}}
         <div class="px-3 py-1">
-            {{ $quotations->links() }}
+            {{ $clients->links() }}
         </div>
     </div>
 </div>

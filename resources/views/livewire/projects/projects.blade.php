@@ -6,15 +6,11 @@
         </div>
         <div class="inline mt-4 pl-4 pr-24 md:pl-0 md:pr-0 md:mt-0 md:block md:col-span-4">
             <div class="text-xl font-bold text-center text-blue-400 uppercase">
-                <h1>Cotizaciones</h1>
+                <h1>Proyectos</h1>
             </div>
         </div>
         <div class="inline mt-4 md:mt-0 md:block md:col-span-4">
-            <a href="{{route('quotation.create')}}">
-                <x-secondary-button class="float-right dark:bg-gray-800 text-blue-500 bg-blue-100 border border-blue-500 shadow-md hover:shadow-blue-400 hover:bg-blue-400 hover:text-white">
-                    <i class="fa fa-solid fa-plus"> Nueva Cotización</i>
-                </x-secondary-button>
-            </a>
+            <livewire:projects.project-create />
         </div>
     </div>
 
@@ -24,7 +20,7 @@
         <input type="number" name="perPage" wire:model="perPage" class="w-[70px] dark:bg-gray-800 pr-2 py-1 cursor-pointer bg-white border-none rounded-lg focus:ring-gray-400">
     </div>
 
-    {{-- Tabla de cotizaciones --}}
+    {{-- Tabla de proyectos --}}
     <div class="relative hidden md:block mt-2 md:mt-4 overflow-x-hidden shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-sm text-center text-gray-100 uppercase bg-gray-400 dark:bg-gray-700 dark:text-gray-400">
@@ -42,9 +38,9 @@
                         @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('client_id')">
-                        Cliente
-                        @if ($sort == 'client_id')
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('project_name')">
+                        Nombre
+                        @if ($sort == 'project_name')
                         @if ($direction == 'asc')
                         <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
                         @else
@@ -55,9 +51,9 @@
                         @endif
                     </th>
 
-                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('total_quotation_amount')">
-                        Precio Total
-                        @if ($sort == 'total_quotation_amount')
+                    <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="order('project_type')">
+                        Tipo
+                        @if ($sort == 'project_type')
                         @if ($direction == 'asc')
                         <i class="ml-2 fa-solid fa-arrow-up-z-a"></i>
                         @else
@@ -68,7 +64,21 @@
                         @endif
                     </th>
 
-                    {{-- Otros campos según tus necesidades --}}
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Descripción
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Kilowatts Requeridos
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Fecha de Inicio
+                    </th>
+
+                    <th scope="col" class="px-6 py-3 cursor-pointer">
+                        Término Estimado
+                    </th>
 
                     <th scope="col" class="px-6 py-3">
                         Acciones
@@ -77,20 +87,24 @@
             </thead>
 
             <tbody>
-                @forelse ($quotations as $quotation)
+                @forelse ($projects as $project)
                 <tr class="text-center bg-white border-b text-md dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $quotation->id }}
+                        {{ $project->id }}
                     </th>
-                    <td class="px-6 py-4 dark:text-lg">{{ $quotation->client->name }}</td>
-                    <td class="px-6 py-4 dark:text-lg">{{ $quotation->total_quotation_amount }}</td>
-                    {{-- Agrega aquí otros campos según tus necesidades --}}
+                    <td class="px-6 py-4 dark:text-lg">{{ $project->client->name }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $project->project_type }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $project->description }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $project->required_kilowatts }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $project->start_date }}</td>
+                    <td class="px-6 py-4 dark:text-lg">{{ $project->expected_end_date }}</td>
+
                     <td class="flex justify-around py-4 pl-2 pr-8">
                         {{-- Acciones --}}
                         <div @if ($open) class="flex pointer-events-none opacity-20" @else class="flex" @endif>
-                            <livewire:quotations.quotation-show :quotation='$quotation' :key='$quotation->id' />
-                            <livewire:quotations.quotation-edit :quotation='$quotation' :key='$quotation->id' />
-                            <livewire:quotations.quotation-delete :quotation='$quotation' :key='$quotation->id' />
+                            <livewire:projects.project-show :project='$project' :key='$project->id' />
+                            <livewire:projects.project-edit :project='$project' :key='$project->id' />
+                            <livewire:projects.project-delete :project='$project' :key='$project->id' />
                         </div>
                     </td>
                 </tr>
@@ -107,7 +121,7 @@
 
         {{-- Paginación --}}
         <div class="px-3 py-1">
-            {{ $quotations->links() }}
+            {{ $projects->links() }}
         </div>
     </div>
 </div>

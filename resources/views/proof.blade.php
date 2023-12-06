@@ -1,11 +1,14 @@
+<x-app-layout>
     <div class="p-4 min-h-screen flex items-start justify-start bg-gray-100 dark:bg-gray-800">
         <div class="max-w-lg w-full p-4 bg-white dark:bg-gray-700 shadow-md rounded-md">
             <h1 class="text-2xl text-center font-bold mb-4 text-gray-800 dark:text-white">Crear Cotización</h1>
 
             <!-- Secciones en una lista vertical -->
             <div class="space-y-4">
-                <livewire:quotations.client-info />
-
+                <!-- Sección 1: Información del Cliente -->
+                <a href="#" class="block bg-gray-500 text-white p-4 rounded-md transition duration-300 ease-in-out">
+                    Información del Cliente
+                </a>
 
                 <!-- Sección 2: Detalles del Proyecto -->
                 <a href="#" class="block bg-gray-500 text-white p-4 rounded-md transition duration-300 ease-in-out">
@@ -46,3 +49,4 @@
             </div>
         </div>
     </div>
+</x-app-layout>

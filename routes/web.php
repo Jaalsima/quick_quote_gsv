@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Clients\Clients;
+use App\Http\Livewire\Projects\Projects;
 use App\Http\Livewire\Quotations\Quotations;
+use App\Http\Livewire\Quotations\QuotationCreate;
 use App\Http\Controllers\HomeController;
 // use App\Http\Controllers\QuotationController;
 
@@ -31,5 +34,13 @@ Route::middleware([
     // Route::put('/quotations/{quotation}/update', [QuotationController::class, 'update'])->name('quotations.update');
     // Route::delete('/quotations/{quotation}/delete', [QuotationController::class, 'destroy'])->name('quotations.destroy');
 
+
+    Route::get('clients', Clients::class)->name('clients');
+    Route::get('clients', Clients::class)->name('clients');
+    Route::get('projects', Projects::class)->name('projects');
     Route::get('quotations', Quotations::class)->name('quotations');
+    Route::get('quotation/create', QuotationCreate::class)->name('quotation.create');
+    Route::get('proof', function () {
+        return view('proof');
+    })->name('proof');
 });
